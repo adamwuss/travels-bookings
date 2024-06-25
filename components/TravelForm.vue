@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-6 p-6 bg-gray-100 shadow rounded-lg">
+  <div class="mb-6 p-6 bg-white shadow rounded-lg">
     <h2 class="text-xl mb-4 font-semibold">Add/Edit Travel</h2>
     <form @submit.prevent="saveTravel" class="space-y-4">
       <div>

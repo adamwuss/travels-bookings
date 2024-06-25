@@ -41,14 +41,13 @@ const props = defineProps<{
   bookings: Booking[];
 }>();
 
-const emit = defineEmits(['update']);
+const emit = defineEmits(['edit', 'delete']);
 
 const editBooking = (booking: Booking) => {
-  // Implement edit functionality
+  emit('edit', booking);
 };
 
 const deleteBooking = (id: number) => {
-  // Delete booking from your API or data source
-  emit('update');
+  emit('delete', id);
 };
 </script>
