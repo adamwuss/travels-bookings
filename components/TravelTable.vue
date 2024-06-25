@@ -48,14 +48,13 @@ const props = defineProps<{
   travels: Travel[];
 }>();
 
-const emit = defineEmits(['update']);
+const emit = defineEmits(['edit', 'delete']);
 
 const editTravel = (travel: Travel) => {
-  // Implement edit functionality
+  emit('edit', travel);
 };
 
 const deleteTravel = (id: number) => {
-  // Delete travel from your API or data source
-  emit('update');
+  emit('delete', id);
 };
 </script>
