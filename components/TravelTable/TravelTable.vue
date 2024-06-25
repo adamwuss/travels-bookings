@@ -35,18 +35,9 @@
 </template>
 
 <script setup lang="ts">
-interface Travel {
-  id: number;
-  name: string;
-  departure: string;
-  return: string;
-  price: number;
-  rating: number;
-  description: string;
-  picture: string;
-}
+import type { Travel } from "./types";
 
-const props = defineProps<{
+defineProps<{
   travels: Travel[];
 }>();
 

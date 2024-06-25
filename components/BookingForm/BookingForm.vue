@@ -65,18 +65,7 @@
 
 <script setup lang="ts">
 import { ref, watch, defineProps, defineEmits } from 'vue';
-
-interface Booking {
-  id: number;
-  travel: string;
-  customer: string;
-  email: string;
-  phone: string;
-  age: number;
-  gender: string;
-  payment: string;
-  notes: string;
-}
+import type { Booking } from "./types";
 
 const props = defineProps<{
   bookingToEdit: Booking | null;

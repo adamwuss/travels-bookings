@@ -8,8 +8,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import BookingForm from '~/components/BookingForm.vue';
-import BookingTable from '~/components/BookingTable.vue';
+import {
+  BookingTable,
+  BookingForm,
+} from "~/components";
 
 interface Booking {
   id: number;

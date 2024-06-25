@@ -45,17 +45,7 @@
 
 <script setup lang="ts">
 import { ref, watch, defineProps, defineEmits } from 'vue';
-
-interface Travel {
-  id: number;
-  name: string;
-  departure: string;
-  return: string;
-  price: number;
-  rating: number;
-  description: string;
-  picture: string;
-}
+import type { Travel } from "./types";
 
 const props = defineProps<{
   travelToEdit: Travel | null;

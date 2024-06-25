@@ -27,19 +27,9 @@
 </template>
 
 <script setup lang="ts">
-interface Booking {
-  id: number;
-  travel: string;
-  customer: string;
-  email: string;
-  phone: string;
-  age: number;
-  gender: string;
-  payment: string;
-  notes: string;
-}
+import type { Booking } from "./types";
 
-const props = defineProps<{
+defineProps<{
   bookings: Booking[];
 }>();
 
