@@ -35,13 +35,14 @@
 </template>
 
 <script setup lang="ts">
-import type { Travel } from "./types";
+// types
+import type { Emits, Travel } from "./types";
 
 defineProps<{
   travels: Travel[];
 }>();
 
-const emit = defineEmits(['edit', 'delete']);
+const emit = defineEmits<Emits>();
 
 const editTravel = (travel: Travel) => {
   emit('edit', travel);

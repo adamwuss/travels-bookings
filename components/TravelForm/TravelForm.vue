@@ -44,8 +44,10 @@
 </template>
 
 <script setup lang="ts">
+// vue
 import { ref, watch, defineProps, defineEmits } from 'vue';
-import type { Travel } from "./types";
+// types
+import type { Emits, Travel } from "./types";
 
 const props = defineProps<{
   travelToEdit: Travel | null;
@@ -62,7 +64,7 @@ const localTravel = ref<Travel>({
   picture: ''
 });
 
-const emit = defineEmits(['save']);
+const emit = defineEmits<Emits>();
 
 const resetForm = () => {
   localTravel.value = {

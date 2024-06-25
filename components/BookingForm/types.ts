@@ -9,3 +9,7 @@ export interface Booking {
     payment: string;
     notes: string;
 }
+
+export interface Emits {
+    (e: 'save', booking: Booking): void;
+}

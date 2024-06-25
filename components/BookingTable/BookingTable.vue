@@ -27,13 +27,14 @@
 </template>
 
 <script setup lang="ts">
-import type { Booking } from "./types";
+// types
+import type { Booking, Emits } from "./types";
 
 defineProps<{
   bookings: Booking[];
 }>();
 
-const emit = defineEmits(['edit', 'delete']);
+const emit = defineEmits<Emits>();
 
 const editBooking = (booking: Booking) => {
   emit('edit', booking);

@@ -5,7 +5,6 @@
       <div v-if="step === 1" class="space-y-4">
         <label for="travel" class="block text-sm font-medium text-gray-700">Select Travel</label>
         <select id="travel" v-model="localBooking.travel" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
-          <!-- Add options dynamically -->
           <option value="Trip to Paris">Trip to Paris</option>
           <option value="Trip to New York">Trip to New York</option>
         </select>
@@ -64,8 +63,10 @@
 </template>
 
 <script setup lang="ts">
+// vue
 import { ref, watch, defineProps, defineEmits } from 'vue';
-import type { Booking } from "./types";
+// types
+import type { Booking, Emits } from "./types";
 
 const props = defineProps<{
   bookingToEdit: Booking | null;
@@ -85,7 +86,7 @@ const localBooking = ref<Booking>({
 
 const step = ref(1);
 
-const emit = defineEmits(['save']);
+const emit = defineEmits<Emits>();
 
 const resetForm = () => {
   localBooking.value = {

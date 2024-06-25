@@ -8,3 +8,8 @@ export interface Travel {
     description: string;
     picture: string;
 }
+
+export interface Emits {
+    (e: 'edit', travel: Travel): void;
+    (e: 'delete', id: number): void;
+}
