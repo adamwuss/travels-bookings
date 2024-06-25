@@ -2,10 +2,22 @@
   <div class="min-h-screen flex flex-col">
     <header class="bg-gray-800 p-4">
       <div class="container mx-auto">
-        <h1 class="text-white text-3xl font-bold">Travels and Bookings Management System</h1>
+        <h1 class="text-white text-3xl font-bold">
+          Travels and Bookings Management System
+        </h1>
         <nav class="mt-4 flex space-x-4">
-          <nuxt-link to="/" class="text-blue-300 hover:text-blue-500">Manage Travels</nuxt-link>
-          <nuxt-link to="/bookings" class="text-blue-300 hover:text-blue-500">Manage Bookings</nuxt-link>
+          <nuxt-link
+            to="/"
+            class="text-blue-300 hover:text-blue-500"
+          >
+            Manage Travels
+          </nuxt-link>
+          <nuxt-link
+            to="/bookings"
+            class="text-blue-300 hover:text-blue-500"
+          >
+            Manage Bookings
+          </nuxt-link>
         </nav>
       </div>
     </header>

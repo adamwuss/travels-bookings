@@ -1,8 +1,17 @@
 <template>
   <div class="p-6 bg-white shadow rounded-lg">
-    <h1 class="text-2xl font-bold mb-4">Manage Bookings</h1>
-    <BookingForm @save="handleSaveBooking" :bookingToEdit="bookingToEdit" />
-    <BookingTable :bookings="bookings" @edit="handleEditBooking" @delete="handleDeleteBooking" />
+    <h1 class="text-2xl font-bold mb-4">
+      Manage Bookings
+    </h1>
+    <BookingForm
+      :booking-to-edit="bookingToEdit"
+      @save="handleSaveBooking"
+    />
+    <BookingTable
+      :bookings="bookings"
+      @edit="handleEditBooking"
+      @delete="handleDeleteBooking"
+    />
   </div>
 </template>
 

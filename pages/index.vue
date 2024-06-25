@@ -1,8 +1,17 @@
 <template>
   <div class="p-6 bg-white shadow rounded-lg">
-    <h1 class="text-2xl font-bold mb-4">Manage Travels</h1>
-    <TravelForm @save="handleSaveTravel" :travelToEdit="travelToEdit" />
-    <TravelTable :travels="travels" @edit="handleEditTravel" @delete="handleDeleteTravel" />
+    <h1 class="text-2xl font-bold mb-4">
+      Manage Travels
+    </h1>
+    <TravelForm
+      :travel-to-edit="travelToEdit"
+      @save="handleSaveTravel"
+    />
+    <TravelTable
+      :travels="travels"
+      @edit="handleEditTravel"
+      @delete="handleDeleteTravel"
+    />
   </div>
 </template>
 
