@@ -36,11 +36,9 @@
 
 <script setup lang="ts">
 // types
-import type { Emits, Travel } from "./types";
+import type { Emits, Travel, Props } from "./types";
 
-defineProps<{
-  travels: Travel[];
-}>();
+defineProps<Props>();
 
 const emit = defineEmits<Emits>();
 

@@ -9,6 +9,11 @@ export interface Travel {
     picture: string;
 }
 
+export interface Props {
+    travels: Travel[];
+}
+
+
 export interface Emits {
     (e: 'edit', travel: Travel): void;
     (e: 'delete', id: number): void;

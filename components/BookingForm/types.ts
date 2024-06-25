@@ -10,6 +10,10 @@ export interface Booking {
     notes: string;
 }
 
+export interface Props {
+    bookingToEdit: Booking | null;
+}
+
 export interface Emits {
     (e: 'save', booking: Booking): void;
 }

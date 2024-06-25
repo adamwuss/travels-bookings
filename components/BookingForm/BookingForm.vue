@@ -66,11 +66,9 @@
 // vue
 import { ref, watch, defineProps, defineEmits } from 'vue';
 // types
-import type { Booking, Emits } from "./types";
+import type { Booking, Emits, Props } from "./types";
 
-const props = defineProps<{
-  bookingToEdit: Booking | null;
-}>();
+const props = defineProps<Props>();
 
 const localBooking = ref<Booking>({
   id: 0,

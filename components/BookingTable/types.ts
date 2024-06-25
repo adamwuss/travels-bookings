@@ -10,6 +10,10 @@ export interface Booking {
     notes: string;
 }
 
+export interface Props {
+    bookings: Booking[];
+}
+
 export interface Emits {
     (e: 'edit', booking: Booking): void;
     (e: 'delete', id: number): void;

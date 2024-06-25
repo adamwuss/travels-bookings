@@ -47,11 +47,9 @@
 // vue
 import { ref, watch, defineProps, defineEmits } from 'vue';
 // types
-import type { Emits, Travel } from "./types";
+import type { Emits, Travel, Props } from "./types";
 
-const props = defineProps<{
-  travelToEdit: Travel | null;
-}>();
+const props = defineProps<Props>();
 
 const localTravel = ref<Travel>({
   id: 0,

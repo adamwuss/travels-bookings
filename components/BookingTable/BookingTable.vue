@@ -28,11 +28,9 @@
 
 <script setup lang="ts">
 // types
-import type { Booking, Emits } from "./types";
+import type { Booking, Emits, Props } from "./types";
 
-defineProps<{
-  bookings: Booking[];
-}>();
+defineProps<Props>();
 
 const emit = defineEmits<Emits>();
 
