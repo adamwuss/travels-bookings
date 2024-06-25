@@ -23,7 +23,17 @@ interface Travel {
 }
 
 const travels = ref<Travel[]>([
-  { id: 1, name: 'Trip to Paris', departure: '2024-07-01', return: '2024-07-10', price: 1200, rating: 4.5, description: 'A wonderful trip to Paris', picture: 'https://sa.visamiddleeast.com/dam/VCOM/regional/cemea/generic-cemea/travel-with-visa/destinations/paris/marquee-travel-paris-800x450.jpg' }
+  // mocked one travel
+  {
+    id: 1,
+    name: 'Trip to Paris',
+    departure: '2024-07-01',
+    return: '2024-07-10',
+    price: 1200,
+    rating: 4.5,
+    description: 'A wonderful trip to Paris',
+    picture: 'https://sa.visamiddleeast.com/dam/VCOM/regional/cemea/generic-cemea/travel-with-visa/destinations/paris/marquee-travel-paris-800x450.jpg'
+  }
 ]);
 
 const travelToEdit = ref<Travel | null>(null);

@@ -24,7 +24,18 @@ interface Booking {
 }
 
 const bookings = ref<Booking[]>([
-  { id: 1, travel: 'Trip to Paris', customer: 'John Doe', email: 'john@example.com', phone: '123-456-7890', age: 30, gender: 'male', payment: 'Credit transfer', notes: '' }
+  // mocked one booking
+  {
+    id: 1,
+    travel: 'Trip to Paris',
+    customer: 'John Doe',
+    email: 'john@example.com',
+    phone: '123-456-7890',
+    age: 30,
+    gender: 'male',
+    payment: 'Credit transfer',
+    notes: ''
+  }
 ]);
 
 const bookingToEdit = ref<Booking | null>(null);
