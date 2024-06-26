@@ -147,7 +147,8 @@
 // vue
 import { ref, watch, defineProps, defineEmits } from "vue";
 // types
-import type { Booking, Emits, Props } from "./types";
+import type { Booking } from "~/types";
+import type { Emits, Props } from "./types";
 
 const props = defineProps<Props>();
 

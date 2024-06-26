@@ -60,7 +60,8 @@
 
 <script setup lang="ts">
 // types
-import type { Emits, Travel, Props } from "./types";
+import type { Travel } from "~/types";
+import type { Emits, Props } from "./types";
 
 defineProps<Props>();
 

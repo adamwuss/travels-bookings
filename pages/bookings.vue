@@ -11,20 +11,12 @@
 </template>
 
 <script setup lang="ts">
+// vue
 import { ref } from "vue";
+// components
 import { BookingTable, BookingForm } from "~/components";
-
-interface Booking {
-  id: number;
-  travel: string;
-  customer: string;
-  email: string;
-  phone: string;
-  age: number;
-  gender: string;
-  payment: string;
-  notes: string;
-}
+// types
+import type { Booking } from "~/types";
 
 const bookings = ref<Booking[]>([
   // mocked one booking

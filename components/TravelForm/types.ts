@@ -1,13 +1,4 @@
-export interface Travel {
-  id: number;
-  name: string;
-  departure: string;
-  return: string;
-  price: number;
-  rating: number;
-  description: string;
-  picture: string;
-}
+import type { Travel } from "~/types";
 
 export interface Props {
   travelToEdit: Travel | null;

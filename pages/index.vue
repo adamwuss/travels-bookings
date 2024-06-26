@@ -11,19 +11,12 @@
 </template>
 
 <script setup lang="ts">
+// vue
 import { ref } from "vue";
+// components
 import { TravelForm, TravelTable } from "~/components";
-
-interface Travel {
-  id: number;
-  name: string;
-  departure: string;
-  return: string;
-  price: number;
-  rating: number;
-  description: string;
-  picture: string;
-}
+// types
+import type { Travel } from "~/types";
 
 const travels = ref<Travel[]>([
   // mocked one travel

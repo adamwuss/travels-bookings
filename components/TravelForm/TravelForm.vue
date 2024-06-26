@@ -113,7 +113,8 @@
 // vue
 import { ref, watch, defineProps, defineEmits } from "vue";
 // types
-import type { Emits, Travel, Props } from "./types";
+import type { Travel } from "~/types";
+import type { Emits, Props } from "./types";
 
 const props = defineProps<Props>();
 

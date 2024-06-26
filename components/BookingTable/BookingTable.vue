@@ -46,7 +46,8 @@
 
 <script setup lang="ts">
 // types
-import type { Booking, Emits, Props } from "./types";
+import type { Booking } from "~/types";
+import type { Emits, Props } from "./types";
 
 defineProps<Props>();
 
