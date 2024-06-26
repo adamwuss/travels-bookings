@@ -1,2 +1,3 @@
-npm test
-npm lintfix
+yarn run test
+yarn run lintfix
+yarn run lint
