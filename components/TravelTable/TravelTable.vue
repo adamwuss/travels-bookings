@@ -25,7 +25,7 @@
             {{ travel.return }}
           </td>
           <td class="px-4 py-2">
-            {{ travel.price }}
+            {{ travel.price }} $
           </td>
           <td class="px-4 py-2">
             {{ travel.rating }}
