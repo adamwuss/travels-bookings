@@ -3,38 +3,18 @@
     <table class="table-auto w-full bg-white shadow rounded-lg">
       <thead class="bg-gray-100">
         <tr>
-          <th class="px-4 py-2 text-left">
-            Name
-          </th>
-          <th class="px-4 py-2 text-left">
-            Departure
-          </th>
-          <th class="px-4 py-2 text-left">
-            Return
-          </th>
-          <th class="px-4 py-2 text-left">
-            Price
-          </th>
-          <th class="px-4 py-2 text-left">
-            Rating
-          </th>
-          <th class="px-4 py-2 text-left">
-            Description
-          </th>
-          <th class="px-4 py-2 text-left">
-            Picture
-          </th>
-          <th class="px-4 py-2 text-left">
-            Actions
-          </th>
+          <th class="px-4 py-2 text-left">Name</th>
+          <th class="px-4 py-2 text-left">Departure</th>
+          <th class="px-4 py-2 text-left">Return</th>
+          <th class="px-4 py-2 text-left">Price</th>
+          <th class="px-4 py-2 text-left">Rating</th>
+          <th class="px-4 py-2 text-left">Description</th>
+          <th class="px-4 py-2 text-left">Picture</th>
+          <th class="px-4 py-2 text-left">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr
-          v-for="travel in travels"
-          :key="travel.id"
-          class="border-t"
-        >
+        <tr v-for="travel in travels" :key="travel.id" class="border-t">
           <td class="px-4 py-2">
             {{ travel.name }}
           </td>
@@ -58,7 +38,7 @@
               :src="travel.picture"
               alt="Travel Picture"
               class="w-16 h-16 object-cover"
-            >
+            />
           </td>
           <td class="px-4 py-2">
             <button
@@ -89,10 +69,10 @@ defineProps<Props>();
 const emit = defineEmits<Emits>();
 
 const editTravel = (travel: Travel) => {
-  emit('edit', travel);
+  emit("edit", travel);
 };
 
 const deleteTravel = (id: number) => {
-  emit('delete', id);
+  emit("delete", id);
 };
 </script>

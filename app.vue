@@ -6,16 +6,10 @@
           Travels and Bookings Management System
         </h1>
         <nav class="mt-4 flex space-x-4">
-          <nuxt-link
-            to="/"
-            class="text-blue-300 hover:text-blue-500"
-          >
+          <nuxt-link to="/" class="text-blue-300 hover:text-blue-500">
             Manage Travels
           </nuxt-link>
-          <nuxt-link
-            to="/bookings"
-            class="text-blue-300 hover:text-blue-500"
-          >
+          <nuxt-link to="/bookings" class="text-blue-300 hover:text-blue-500">
             Manage Bookings
           </nuxt-link>
         </nav>
