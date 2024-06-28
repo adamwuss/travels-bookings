@@ -57,15 +57,14 @@
         </div>
         <div>
           <label for="rating" class="block text-sm font-medium text-gray-700"
-            >Rating (from 0 to 5)</label
+            >Rating</label
           >
           <input
             id="rating"
             v-model="localTravel.rating"
             type="number"
-            step="1"
+            step="0.1"
             max="5"
-            min="0"
             placeholder="Rating"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             required
@@ -82,7 +81,7 @@
           placeholder="Description"
           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           required
-        />
+        ></textarea>
       </div>
       <div>
         <label for="picture" class="block text-sm font-medium text-gray-700"
@@ -110,14 +109,21 @@
 </template>
 
 <script setup lang="ts">
-// vue
-import { ref, watch, defineProps, defineEmits } from "vue";
-// types
-import type { Travel } from "~/types";
-import type { Emits, Props } from "./types";
+import { ref } from "vue";
+import { useTravelStore } from "~/stores/travel";
 
-const props = defineProps<Props>();
+interface Travel {
+  id: number;
+  name: string;
+  departure: string;
+  return: string;
+  price: number;
+  rating: number;
+  description: string;
+  picture: string;
+}
 
+const travelStore = useTravelStore();
 const localTravel = ref<Travel>({
   id: 0,
   name: "",
@@ -128,8 +134,6 @@ const localTravel = ref<Travel>({
   description: "",
   picture: "",
 });
-
-const emit = defineEmits<Emits>();
 
 const resetForm = () => {
   localTravel.value = {
@@ -145,19 +149,11 @@ const resetForm = () => {
 };
 
 const saveTravel = () => {
-  emit("save", localTravel.value);
+  if (localTravel.value.id) {
+    travelStore.updateTravel(localTravel.value);
+  } else {
+    travelStore.addTravel(localTravel.value);
+  }
   resetForm();
 };
-
-watch(
-  () => props.travelToEdit,
-  (newValue) => {
-    if (newValue) {
-      localTravel.value = { ...newValue };
-    } else {
-      resetForm();
-    }
-  },
-  { immediate: true },
-);
 </script>

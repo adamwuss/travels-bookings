@@ -12,27 +12,19 @@
       </thead>
       <tbody>
         <tr v-for="booking in bookings" :key="booking.id" class="border-t">
-          <td class="px-4 py-2">
-            {{ booking.travel }}
-          </td>
-          <td class="px-4 py-2">
-            {{ booking.customer }}
-          </td>
-          <td class="px-4 py-2">
-            {{ booking.payment }}
-          </td>
-          <td class="px-4 py-2">
-            {{ booking.notes }}
-          </td>
+          <td class="px-4 py-2">{{ booking.travel }}</td>
+          <td class="px-4 py-2">{{ booking.customer }}</td>
+          <td class="px-4 py-2">{{ booking.payment }}</td>
+          <td class="px-4 py-2">{{ booking.notes }}</td>
           <td class="px-4 py-2">
             <button
-              class="btn btn-secondary btn-sm mr-2"
+              class="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               @click="editBooking(booking)"
             >
               Edit
             </button>
             <button
-              class="btn btn-danger btn-sm"
+              class="px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
               @click="deleteBooking(booking.id)"
             >
               Delete
@@ -45,19 +37,21 @@
 </template>
 
 <script setup lang="ts">
+// vue
+import { computed } from "vue";
+// stores
+import { useBookingStore } from "~/stores/booking";
 // types
 import type { Booking } from "~/types";
-import type { Emits, Props } from "./types";
 
-defineProps<Props>();
-
-const emit = defineEmits<Emits>();
+const bookingStore = useBookingStore();
+const bookings = computed(() => bookingStore.getAllBookings);
 
 const editBooking = (booking: Booking) => {
-  emit("edit", booking);
+  bookingStore.updateBooking(booking);
 };
 
 const deleteBooking = (id: number) => {
-  emit("delete", id);
+  bookingStore.deleteBooking(id);
 };
 </script>

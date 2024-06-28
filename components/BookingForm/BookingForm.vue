@@ -12,8 +12,13 @@
           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           required
         >
-          <option value="Trip to Paris">Trip to Paris</option>
-          <option value="Trip to New York">Trip to New York</option>
+          <option
+            v-for="travel in travels"
+            :key="travel.id"
+            :value="travel.name"
+          >
+            {{ travel.name }}
+          </option>
         </select>
         <div class="flex justify-end">
           <button
@@ -128,7 +133,7 @@
             v-model="localBooking.notes"
             placeholder="Notes"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
+          ></textarea>
         </div>
         <div class="flex justify-end">
           <button
@@ -145,13 +150,16 @@
 
 <script setup lang="ts">
 // vue
-import { ref, watch, defineProps, defineEmits } from "vue";
+import { ref, computed } from "vue";
+// stores
+import { useBookingStore } from "~/stores/booking";
+import { useTravelStore } from "~/stores/travel";
 // types
 import type { Booking } from "~/types";
-import type { Emits, Props } from "./types";
 
-const props = defineProps<Props>();
-
+const bookingStore = useBookingStore();
+const travelStore = useTravelStore();
+const travels = computed(() => travelStore.getAllTravels);
 const localBooking = ref<Booking>({
   id: 0,
   travel: "",
@@ -165,8 +173,6 @@ const localBooking = ref<Booking>({
 });
 
 const step = ref(1);
-
-const emit = defineEmits<Emits>();
 
 const resetForm = () => {
   localBooking.value = {
@@ -184,22 +190,13 @@ const resetForm = () => {
 };
 
 const saveBooking = () => {
-  emit("save", localBooking.value);
+  if (localBooking.value.id) {
+    bookingStore.updateBooking(localBooking.value);
+  } else {
+    bookingStore.addBooking(localBooking.value);
+  }
   resetForm();
 };
-
-watch(
-  () => props.bookingToEdit,
-  (newValue) => {
-    if (newValue) {
-      localBooking.value = { ...newValue };
-      step.value = 1;
-    } else {
-      resetForm();
-    }
-  },
-  { immediate: true },
-);
 
 const nextStep = () => {
   if (step.value < 3) step.value++;

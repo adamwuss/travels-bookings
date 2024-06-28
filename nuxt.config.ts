@@ -8,5 +8,5 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ["@nuxt/eslint", "@nuxt/test-utils/module"],
+  modules: ["@nuxt/eslint", "@nuxt/test-utils/module", "@pinia/nuxt"],
 });
