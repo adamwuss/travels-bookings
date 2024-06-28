@@ -34,7 +34,7 @@
             >
               <button
                 class="px-2 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                @click="editTravel(travel)"
+                @click="editTravel(travel.id)"
               >
                 Edit
               </button>
@@ -54,21 +54,17 @@
 </template>
 
 <script setup lang="ts">
-// vue
 import { computed } from "vue";
-// stores
 import { useTravelStore } from "~/stores/travel";
-// types
-import type { Travel } from "~/types";
 
 const travelStore = useTravelStore();
 const travels = computed(() => travelStore.getAllTravels);
 
-const editTravel = (travel: Travel) => {
-  travelStore.updateTravel(travel);
+const editTravel = (id) => {
+  travelStore.setEditingTravel(id);
 };
 
-const deleteTravel = (id: number) => {
+const deleteTravel = (id) => {
   travelStore.deleteTravel(id);
 };
 </script>

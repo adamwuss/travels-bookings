@@ -6,6 +6,7 @@ import type { Booking } from "~/types";
 export const useBookingStore = defineStore("booking", {
   state: () => ({
     bookings: [] as Booking[],
+    editingBookingId: 0,
   }),
   getters: {
     getAllBookings: (state) => state.bookings,
@@ -27,6 +28,9 @@ export const useBookingStore = defineStore("booking", {
     },
     deleteBooking(id: number) {
       this.bookings = this.bookings.filter((booking) => booking.id !== id);
+    },
+    setEditingBooking(id: number) {
+      this.editingBookingId = id;
     },
   },
 });

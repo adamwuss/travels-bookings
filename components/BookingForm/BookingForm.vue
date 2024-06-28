@@ -1,6 +1,8 @@
 <template>
   <div class="mb-6 p-6 bg-white shadow rounded-lg">
-    <h2 class="text-xl mb-4 font-semibold">Add Booking</h2>
+    <h2 class="text-xl mb-4 font-semibold">
+      {{ isEditing ? "Edit Booking" : "Add Booking" }}
+    </h2>
     <form class="space-y-4" @submit.prevent="saveBooking">
       <div v-if="step === 1" class="space-y-4">
         <label for="travel" class="block text-sm font-medium text-gray-700"
@@ -140,7 +142,7 @@
             type="submit"
             class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Save Booking
+            {{ isEditing ? "Update Booking" : "Save Booking" }}
           </button>
         </div>
       </div>
@@ -149,17 +151,26 @@
 </template>
 
 <script setup lang="ts">
-// vue
-import { ref, computed } from "vue";
-// stores
+import { ref, watch, computed } from "vue";
 import { useBookingStore } from "~/stores/booking";
 import { useTravelStore } from "~/stores/travel";
-// types
-import type { Booking } from "~/types";
+
+interface Booking {
+  id: number;
+  travel: string;
+  customer: string;
+  email: string;
+  phone: string;
+  age: number;
+  gender: string;
+  payment: string;
+  notes: string;
+}
 
 const bookingStore = useBookingStore();
 const travelStore = useTravelStore();
-const travels = computed(() => travelStore.getAllTravels);
+const isEditing = ref(false);
+const step = ref(1);
 const localBooking = ref<Booking>({
   id: 0,
   travel: "",
@@ -171,8 +182,6 @@ const localBooking = ref<Booking>({
   payment: "",
   notes: "",
 });
-
-const step = ref(1);
 
 const resetForm = () => {
   localBooking.value = {
@@ -186,17 +195,37 @@ const resetForm = () => {
     payment: "",
     notes: "",
   };
+  isEditing.value = false;
   step.value = 1;
 };
 
 const saveBooking = () => {
-  if (localBooking.value.id) {
+  if (isEditing.value) {
     bookingStore.updateBooking(localBooking.value);
   } else {
     bookingStore.addBooking(localBooking.value);
   }
   resetForm();
 };
+
+const travels = computed(() => travelStore.getAllTravels);
+const bookingToEdit = computed(() =>
+  bookingStore.getBookingById(bookingStore.editingBookingId),
+);
+
+watch(
+  bookingToEdit,
+  (newValue) => {
+    if (newValue) {
+      localBooking.value = { ...newValue };
+      isEditing.value = true;
+      step.value = 1;
+    } else {
+      resetForm();
+    }
+  },
+  { immediate: true },
+);
 
 const nextStep = () => {
   if (step.value < 3) step.value++;

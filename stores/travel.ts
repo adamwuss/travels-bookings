@@ -6,6 +6,7 @@ import type { Travel } from "~/types";
 export const useTravelStore = defineStore("travel", {
   state: () => ({
     travels: [] as Travel[],
+    editingTravelId: 0,
   }),
   getters: {
     getAllTravels: (state) => state.travels,
@@ -27,6 +28,9 @@ export const useTravelStore = defineStore("travel", {
     },
     deleteTravel(id: number) {
       this.travels = this.travels.filter((travel) => travel.id !== id);
+    },
+    setEditingTravel(id: number) {
+      this.editingTravelId = id;
     },
   },
 });

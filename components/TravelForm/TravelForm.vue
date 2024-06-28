@@ -1,6 +1,8 @@
 <template>
   <div class="mb-6 p-6 bg-white shadow rounded-lg">
-    <h2 class="text-xl mb-4 font-semibold">Add/Edit Travel</h2>
+    <h2 class="text-xl mb-4 font-semibold">
+      {{ isEditing ? "Edit Travel" : "Add Travel" }}
+    </h2>
     <form class="space-y-4" @submit.prevent="saveTravel">
       <div>
         <label for="name" class="block text-sm font-medium text-gray-700"
@@ -101,7 +103,7 @@
           type="submit"
           class="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Save Travel
+          {{ isEditing ? "Update Travel" : "Save Travel" }}
         </button>
       </div>
     </form>
@@ -109,7 +111,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch, computed } from "vue";
 import { useTravelStore } from "~/stores/travel";
 
 interface Travel {
@@ -124,6 +126,7 @@ interface Travel {
 }
 
 const travelStore = useTravelStore();
+const isEditing = ref(false);
 const localTravel = ref<Travel>({
   id: 0,
   name: "",
@@ -146,14 +149,32 @@ const resetForm = () => {
     description: "",
     picture: "",
   };
+  isEditing.value = false;
 };
 
 const saveTravel = () => {
-  if (localTravel.value.id) {
+  if (isEditing.value) {
     travelStore.updateTravel(localTravel.value);
   } else {
     travelStore.addTravel(localTravel.value);
   }
   resetForm();
 };
+
+const travelToEdit = computed(() =>
+  travelStore.getTravelById(travelStore.editingTravelId),
+);
+
+watch(
+  travelToEdit,
+  (newValue) => {
+    if (newValue) {
+      localTravel.value = { ...newValue };
+      isEditing.value = true;
+    } else {
+      resetForm();
+    }
+  },
+  { immediate: true },
+);
 </script>

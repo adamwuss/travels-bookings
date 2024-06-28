@@ -22,7 +22,7 @@
             >
               <button
                 class="px-2 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                @click="editBooking(booking)"
+                @click="editBooking(booking.id)"
               >
                 Edit
               </button>
@@ -42,21 +42,17 @@
 </template>
 
 <script setup lang="ts">
-// vue
 import { computed } from "vue";
-// stores
 import { useBookingStore } from "~/stores/booking";
-// types
-import type { Booking } from "~/types";
 
 const bookingStore = useBookingStore();
 const bookings = computed(() => bookingStore.getAllBookings);
 
-const editBooking = (booking: Booking) => {
-  bookingStore.updateBooking(booking);
+const editBooking = (id) => {
+  bookingStore.setEditingBooking(id);
 };
 
-const deleteBooking = (id: number) => {
+const deleteBooking = (id) => {
   bookingStore.deleteBooking(id);
 };
 </script>
