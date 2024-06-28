@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-x-auto">
+  <div v-if="travels.length" class="overflow-x-auto">
     <table class="table-auto w-full bg-white shadow rounded-lg">
       <thead class="bg-gray-100">
         <tr>
@@ -29,23 +29,28 @@
             />
           </td>
           <td class="px-4 py-2">
-            <button
-              class="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              @click="editTravel(travel)"
+            <div
+              class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2"
             >
-              Edit
-            </button>
-            <button
-              class="px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-              @click="deleteTravel(travel.id)"
-            >
-              Delete
-            </button>
+              <button
+                class="px-2 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                @click="editTravel(travel)"
+              >
+                Edit
+              </button>
+              <button
+                class="px-2 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                @click="deleteTravel(travel.id)"
+              >
+                Delete
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <p v-else class="text-center text-gray-500">No travels available.</p>
 </template>
 
 <script setup lang="ts">

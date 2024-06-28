@@ -17,6 +17,11 @@ describe("BookingTable.vue", () => {
     expect(wrapper.exists()).toBe(true);
   });
 
+  it("displays no bookings message when there are no bookings", () => {
+    const wrapper = mount(BookingTable);
+    expect(wrapper.text()).toContain("No bookings available.");
+  });
+
   it("displays bookings correctly", () => {
     const bookingStore = useBookingStore();
     bookingStore.addBooking({

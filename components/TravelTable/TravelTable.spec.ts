@@ -17,6 +17,11 @@ describe("TravelTable.vue", () => {
     expect(wrapper.exists()).toBe(true);
   });
 
+  it("displays no travels message when there are no travels", () => {
+    const wrapper = mount(TravelTable);
+    expect(wrapper.text()).toContain("No travels available.");
+  });
+
   it("displays travels correctly", () => {
     const travelStore = useTravelStore();
     travelStore.addTravel({
