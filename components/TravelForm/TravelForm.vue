@@ -59,7 +59,7 @@
         </div>
         <div>
           <label for="rating" class="block text-sm font-medium text-gray-700"
-            >Rating</label
+            >Rating (from 0 to 5)</label
           >
           <input
             id="rating"
