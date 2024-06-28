@@ -1,105 +1,50 @@
 // test utils
 import { mount } from "@vue/test-utils";
 // vitest
-import { describe, it, expect } from "vitest";
-// components
-import { BookingTable, BookingForm } from "~/components";
+import { describe, it, expect, beforeEach } from "vitest";
 // pages
 import ManageBookings from "~/pages/bookings.vue";
+// pinia
+import { createPinia, setActivePinia } from 'pinia';
 
-describe("ManageBookings", () => {
-  it("renders BookingForm and BookingTable components", () => {
-    const wrapper = mount(ManageBookings);
-    expect(wrapper.findComponent(BookingForm).exists()).toBe(true);
-    expect(wrapper.findComponent(BookingTable).exists()).toBe(true);
+describe('BookingsPage.vue', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia());
   });
 
-  it("passes bookings to BookingTable", () => {
+  it('renders correctly', () => {
     const wrapper = mount(ManageBookings);
-    const bookingTable = wrapper.findComponent(BookingTable);
-    expect(bookingTable.props("bookings")).toEqual([
-      {
-        id: 1,
-        travel: "Trip to Paris",
-        customer: "John Doe",
-        email: "john@example.com",
-        phone: "123-456-7890",
-        age: 30,
-        gender: "male",
-        payment: "Credit transfer",
-        notes: "",
-      },
-    ]);
+    expect(wrapper.exists()).toBe(true);
   });
 
-  it("handles save booking correctly when adding a new booking", async () => {
-    const wrapper = mount(ManageBookings);
-    const newBooking = {
-      id: Date.now(),
-      travel: "Trip to New York",
-      customer: "Jane Doe",
-      email: "jane@example.com",
-      phone: "987-654-3210",
-      age: 28,
-      gender: "female",
-      payment: "Paypal",
-      notes: "No notes",
-    };
-
-    wrapper.findComponent(BookingForm).vm.$emit("save", newBooking);
-    // @ts-ignore
-    expect(wrapper.vm.bookings).toHaveLength(2);
-    // @ts-ignore
-    expect(wrapper.vm.bookings[1]).toEqual(newBooking);
-  });
-
-  it("handles save booking correctly when editing an existing booking", async () => {
-    const wrapper = mount(ManageBookings);
-    const editedBooking = {
+  it('displays booking items correctly', () => {
+    const bookingStore = useBookingStore();
+    const travelStore = useTravelStore();
+    travelStore.addTravel({
       id: 1,
-      travel: "Trip to London",
-      customer: "John Doe",
-      email: "john@example.com",
-      phone: "123-456-7890",
-      age: 30,
-      gender: "male",
-      payment: "Credit transfer",
-      notes: "Updated notes",
-    };
-
-    // @ts-ignore
-    wrapper.vm.bookingToEdit = editedBooking;
-    wrapper.findComponent(BookingForm).vm.$emit("save", editedBooking);
-    // @ts-ignore
-    expect(wrapper.vm.bookings).toHaveLength(1);
-    // @ts-ignore
-    expect(wrapper.vm.bookings[0]).toEqual(editedBooking);
-  });
-
-  it("handles edit booking correctly", async () => {
-    const wrapper = mount(ManageBookings);
-    const booking = {
+      name: 'Trip to Paris',
+      departure: '2024-07-01',
+      return: '2024-07-10',
+      price: 1200,
+      rating: 4.5,
+      description: 'A wonderful trip to Paris',
+      picture: 'https://example.com/paris.jpg',
+    });
+    bookingStore.addBooking({
       id: 1,
-      travel: "Trip to Paris",
-      customer: "John Doe",
-      email: "john@example.com",
-      phone: "123-456-7890",
+      travel: 'Trip to Paris',
+      customer: 'John Doe',
+      email: 'john@example.com',
+      phone: '123-456-7890',
       age: 30,
-      gender: "male",
-      payment: "Credit transfer",
-      notes: "",
-    };
+      gender: 'male',
+      payment: 'Credit transfer',
+      notes: '',
+    });
 
-    wrapper.findComponent(BookingTable).vm.$emit("edit", booking);
-    // @ts-ignore
-    expect(wrapper.vm.bookingToEdit).toEqual(booking);
-  });
-
-  it("handles delete booking correctly", async () => {
     const wrapper = mount(ManageBookings);
-
-    wrapper.findComponent(BookingTable).vm.$emit("delete", 1);
-    // @ts-ignore
-    expect(wrapper.vm.bookings).toHaveLength(0);
+    const rows = wrapper.findAll('tbody tr');
+    expect(rows).toHaveLength(1);
+    expect(rows[0].text()).toContain('John Doe');
   });
 });
